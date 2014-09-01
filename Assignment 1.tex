@@ -1,0 +1,202 @@
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathabx}
+
+\author{D. Zack Garza}
+\title{Abstract Algebra}
+\subtitle{Math 113, UC Berkeley}
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+	\item Getting to know me.
+	
+	\begin{enumerate}
+	
+		\item Major: Mathematics and Computer Science.
+		
+		\item In the past year, I've taken Vector/Multivariate Calculus, Linear Algebra, Differential Equations, Discrete Mathematics, and Statistics. I am currently taking Berkeley's CS70, a survey course in Finite Mathematics, and am following an Algebraic Topology video series online.
+		
+		\item Oddly enough, the most difficult topic for me has been coming to terms with the idea of induction. The mechanics of carrying out inductive proofs are usually straightforward, but I've always had trouble logically concluding that it really proves any kind of objective truth.
+		
+	\end{enumerate}
+	
+	\item Distinguishing \textit{binary operations}.
+	
+		We start with a definition - denote a \textit{binary operation} $\star$ on a nonempty set $S$  as a map satisfying $\star : S \times S \mapsto S$.
+	
+		\begin{enumerate}
+		
+			\item Composition on the set $S$ of functions $\mathbb{R}\mapsto\mathbb{R}$.
+			
+				Yes - if $f \in S$ maps $\mathbb{R}$ to $\mathbb{R}$, and $g \in S$ also maps $\mathbb{R}$ to $\mathbb{R}$, then the composition $f \circ g$ is \textit{also} a function that maps $\mathbb{R}$ to $\mathbb{R}$ and thus $f \circ g \in S$. From this, it follows that $f \circ g$ is a binary operation $\forall f,g \in S$.
+			
+			\item Composition on the set $S'$ of functions $\mathbb{R}\mapsto\mathbb{R}^2$.
+			
+				No - this is because the operation of function composition $f \circ g$ is not well-defined when the image of $g$ is not in the domain of $f$. In other words, since all $g \in S'$ map $\mathbb{R}$ to $\mathbb{R}^2$, and $f$ can only be applied to elements in $\mathbb{R}$, there are no elements in $S'$. In order for the operation to be binary, elements in the set must be "closed" in the sense that they map back into their own set.
+			
+			\item $\star : a\star b = \frac{1}{2}(a+b) \forall a,b \in \mathbb{Q}$
+			
+				Yes - to prove this, we use the definition of a binary operation to show that $\star$ is a map from $\mathbb{Q} \times \mathbb{Q}$ to $\mathbb{Q}$ for all arbitrary elements $a$ and $b$ in $\mathbb{Q}$.
+				
+				Since $\mathbb{Q}$ and $\mathbb{Q} \times \mathbb{Q}$ are trivially nonempty, consider $a,b \in \mathbb{Q}$. Then, by the definition of a rational number, $a = \frac{r}{s}$ and $b = \frac{u}{v}$ for some $r,s,u,v \in \mathbb{Z}$.
+				Thus, we have,
+				\begin{align*}
+					a \star b &= \frac{1}{2}(a+b) \\
+					&= \frac{1}{2}(\frac{r}{s} + \frac{u}{v}) \\
+					&= \frac{rv + us}{2sv},
+				\end{align*}
+				
+				and from the closure of multiplication and addition in $\mathbb{Z}$, we have
+				\begin{align*}
+					a\star b = \frac{w}{x}
+				\end{align*}
+				
+				where $w = rv + us \in \mathbb{Z}$ and $x = 2sv \in \mathbb{Z}$. Since this shows that $a\star b$ is the ratio of two integers, it is in $\mathbb{Q}$, and $\star$ thus satisfies the definition of a binary operation.
+				
+			
+			\item $\star : a\star b = \max(a,b) \forall a,b \in \mathbb{R}$.
+			
+				Yes - because as long as either $a$ or $b$ is in $\mathbb{R}$, $\star$ is guaranteed to pick one of them out (as long as the \textit{max} operator is defined to handle the edge case of $a=b$). Since the output of $\star$ is identical to one of the inputs in every case, $a\star b$ is always in $\mathbb{R}$, and $\star$ is a binary operation.
+			
+			\item $\star : X \star Y = $ 3 oz of $X$ mixed with 5 oz of $Y$, where $X, Y \in $ the set $D$ of all possible things you can drink.
+			
+				In most cases, yes, although it entirely depends on how the set $D$ is defined. If $D$ includes all liquids (which are all technically possible to drink), then there are many edge cases - for example, there may exist pairs of liquids which, when combined, react to form a non-liquid. In these cases, $\star$ is not a binary operation, as its output is not in $D$. If $D$ is defined as all of the drinkable liquids that won't kill you, a similar argument suggests that there may be some $X\star Y$ that is not in $D$ - that is, a combination of non-toxic liquids that is toxic. In this case, $D$ would have to be \textit{defined} to have the type of set closure necessary for $\star$ to be a binary operation.
+			
+		\end{enumerate}
+		
+	\item Give an example of another set with a binary operation.
+	
+		Addition, on the set of linear $n^{\textrm{th}}$ order differential equations, defined by adding corresponding coefficients of $y', y'', \dots y^n$.
+			
+	\item Which of the binary operations in questions (2) and (3) are associative and/or commutative?
+		\begin{enumerate}
+			\item 2-a: 
+			
+				Associativity: Yes, since $f\circ (g\circ h) = (f\circ g)\circ h$.
+				
+				Commutativity: No, since $f\circ g \neq g\circ f$ for most functions.
+				
+			\item 2-b:
+				Neither, since the operation is not well-defined.
+				
+			\item 2-c:
+				Associativity: No. Assuming it is, we have
+				\begin{align*}
+					(a\star b)\star c &= a\star (b\star c) \\
+					\frac{a+b}{2}\star c &= a\star \frac{b+c}{2} \\
+					\frac{\frac{a+b}{2}+c}{2} &= \frac{a+\frac{b+c}{2}}{2} \\
+					a + b + 2c &= 2a + b +c
+				\end{align*}
+				which is a contradiction.
+				
+				Commutativity: Yes, by the commutativity of addition in $\mathbb{Z}$, and since division distributed over addition commutes as well. (i.e., $\frac{1}{2}(a+b) = \frac{1}{2}(b+a)$).
+				
+				\item 2-d: 
+				
+					Associativity: Yes, by inheriting the associativity of $>$ in $\mathbb{R}$.
+					
+					Commutativity: Yes, since the greatest number in an ordered pair will not change based on their order (i.e., max$(a,b)$ = max$(b,a)\ \forall a,b\in \mathbb{R}$).
+					
+				\item 2-e:
+					
+					Associativity: No, because the relative amounts of each liquid in $(X\star Y)\star Z$ and $X\star (Y\star Z)$ would be different. Take $X$ to be gin, $Y$ to be tonic, and $Z$ to be grenadine. In the first case, you get an 8 oz gin and tonic that is 3/8 alcoholic, take 3 oz of it, and drown it in 5 oz of flavoring (which may in fact be impossible to drink). In the second case, you get tonic water that is 3/8 flavoring, take 5 oz of that, and add 3 oz of gin (which is much more palatable).
+						
+					Commutativity: No, as 3oz of tonic to 5oz of gin packs much more of a punch than 3oz of gin to 5oz of tonic.
+						
+						\item 3: 
+						
+							Associativity: Yes, by the associativity of addition in $\mathbb{R}$.
+							
+							Commutativity: Yes, by commutativity of addition in $\mathbb{R}$.
+						
+		\end{enumerate}
+	
+	\item Is the set $D$ of all things you can drink, with the operation $\star$, a group? Why or why not?
+	
+		No - by definition, $D$ equipped with $\star$ is a group if:
+		\begin{enumerate}
+			\item $\exists ! e\ (e\star a = a\star e = a\ \forall a \in D)$
+			\item $\exists ! a^{-1}\ \forall a \in D\ (a\star a^{-1} = a^{-1}\star a = e)$
+			\item $(a\star b)\star c = a\star (b\star c)\ \forall a,b,c \in D$
+		\end{enumerate}
+		
+		
+		The existence of a single identity element for all liquids poses a problem, as there is no liquid in $D$ that can be added to every other liquid without changing it. Although water might be a possible choice, there is a distinction between a given liquid and its diluted form.
+		
+		If water did serve as the identity element, however, it is not clear there would exist inverses - that is, that every liquid had a co-liquid that turned it back into water. From this, we conclude $(D, \star)$ does not form a group.
+	
+	\item Modular arithmetic (residue classes)
+	
+	\begin{enumerate}
+	
+		\item Prove that $1243 + 1985^2 -4827 +4 \neq 4839 +753^3 -(56)81$ by finding some $n$ such that
+		\begin{align}
+			1243 + 1985^2 -4827 +4 \not\equiv 4839 +753^3 -(56)81 \ (\textrm{mod}\ n)
+		\end{align}
+		
+		We begin by assuming $\exists n$ such that two expressions in (1) \textit{are} equal.
+		By definition, $a \equiv b\ (\textrm{mod}\ n) \implies n \divides  (a-b)$. Substituting (1) into this expression and simplifying addition and subtraction yields
+		\begin{align}
+			n \divides 9709 + 1985^2 + 753^3.
+		\end{align}
+		We know that an odd squared is odd, as is an odd cubed, so $n$ must divide the sum of three odd numbers. Thus, $n$ must divide an \textit{odd} number if the expression in (1) were congruent mod $n$.
+		
+		So, in order to prove they are \textit{not} congruent, we select a number that is \textit{not} odd. For the simplest case, let $n=2$. Using the lemma that $(a+b)\textrm{mod}\ n =((	a\ \textrm{mod}\ n) + (b\ \textrm{mod}\ n))\ \textrm{mod}\ n$, applying $\textrm{mod}\ 2$ to each term in (1) gives
+		\begin{align}
+			1 + 1 - 1 + 0 \stackrel{?}{\not\equiv}  1 + 1 - 0\ (\textrm{mod}\ 2)
+		\end{align}
+		where we have used the fact that the any odd number mod 2 = 1, an odd squared is odd, an odd cubed is odd, and an odd times an even is even. Simplifying (3) gives
+		\begin{align}
+			1 &\stackrel{?}{\not\equiv} 2\ (\textrm{mod}\ 2) \nonumber \\
+			1 &\not\equiv 0\ (\textrm{mod}\ 2).
+		\end{align}
+		
+		And since (4) is a true statement, (1) is also true, and the original statement is proved.
+		
+		
+		\item Let $\mathbb{Z} /n \mathbb{Z}^x = \left\{ \bar{a} \in \mathbb{Z} /n\mathbb{Z} \mid \exists \bar{c} \in \mathbb{Z} /n \mathbb{Z} \textrm{ with } \bar{a} \bar{c} = \bar{1} \right\}$. Show that $\mathbb{Z} /n \mathbb{Z}^x$ with multiplication is a group.
+		
+			To prove $\mathbb{Z} /n \mathbb{Z}^x$ is a group, we simply show that all three group conditions are satisfied. 
+			
+			\begin{enumerate}
+			
+				\item The identity element $e$. 
+				
+				The equivalence class $\bar{1}$ serves as $e$, and it can be shown to be in the set for every $n$ by naming $\bar{1}$ as $c$ in the definition.
+				
+				\item Existence of inverses. 
+				
+				Since the identity element is simply $\bar{1}$, the original set is guaranteed to have inverses for every element by its own definition. In fact, the only items \textit{in} $\mathbb{Z} /n \mathbb{Z}^x$ are those which \textit{have} multiplicative inverses.
+				
+				\item Associativity
+				
+				Since $G_1 = (\mathbb{Z} /n \mathbb{Z}^x, \star)$ would be a subgroup of $G_2 = (\mathbb{Z} /n \mathbb{Z}^x, \star)$, if we can show that associativity holds in $G_2$, it will also hold in $G_1$. 
+				
+				By definition, $a \equiv b\ \textrm{mod n} \implies n \divides (a-b)$.
+				If associativity holds, we have
+				\begin{align*}
+					(ab)c \equiv a(bc)\ \textrm{mod}\ n \\
+					\implies n \divides (ab)c - a(bc) \\
+				\end{align*}
+				
+				But since the RHS is simply multiplication and subtraction over $\mathbb{Z}$, it is equal to $0$. Since $n \divides 0\ \forall n$, multiplication is associative in $\mathbb{Z} /n \mathbb{Z}$, and thus also associative in the subset $\mathbb{Z} /n \mathbb{Z}^x$. 
+				
+				From this, we can conclude that $(\mathbb{Z} /n \mathbb{Z}^x,\star)$  is indeed a group.
+			\end{enumerate}
+		
+		\item Prove that if $a$ and $n$ have a common divisor other than 1, then $a \not\in \mathbb{Z} /n \mathbb{Z}^x$.
+		
+	\end{enumerate}
+	
+\end{enumerate}
+
+\end{document}
